@@ -1,0 +1,30 @@
+<div class="app-header" data-ng-controller="headerController as header" data-ng-init="header.validateAuthentication();">
+	<nav class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="col-md-5">
+				<img data-ng-src="{{header.images.logo}}" width="{{header.images.logo_size}}" height="{{header.images.logo_size}}" />
+				<img data-ng-src="{{header.images.logo_text}}" />
+			</div>
+
+			<div class="col-md-7 login">			
+				<form class="form-inline" role="form" name="loginForm" data-ng-submit="header.validateUser();" data-ng-show="!header.credential.signedin">
+					<div class="form-group">
+						<input type="text" invalid-message="{{header.strings.username_required}}"
+						data-ng-model="header.login.username" 
+						class="form-control" id="username" data-ng-maxlength=8 required 
+						placeholder="{{header.strings.username}}">
+					</div>
+					<div class="form-group">
+						<input type="password" invalid-message="{{header.strings.password_required}}"
+						data-ng-model="header.login.password" class="form-control" id="password" 
+						data-ng-maxlength=6 required placeholder="{{header.strings.password}}">
+					</div>
+					<button type="submit" class="btn btn-primary">{{header.strings.signin}}</button>
+				</form>
+				<div data-ng-hide="!header.credential.signedin">
+					Welcome {{header.credential.username}}! [<a href data-ng-click="header.signout();">Sign Out</a>]
+				</div>
+			</div>
+		</div>
+	</nav>
+</div>

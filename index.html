@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html data-ng-app="myBook">
+<head>
+<!-- character encoding declaration if need -->
+<meta charset="UTF-8">
+<!-- title of the document -->
+<title>:: My Book ::</title>
+	<!-- jquery -->
+	<script src="lib/jquery/jquery-2.1.1.min.js"></script>
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<!-- angular -->
+	<script type="text/javascript" src="lib/angular/angular.min.js"></script>
+	<script type="text/javascript" src="lib/angular/angular-route.min.js"></script>
+	
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/directive.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>	
+	<script type="text/javascript" src="js/feed.js"></script>
+	<script type="text/javascript" src="js/profile.js"></script>	
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<!-- content of the document -->
+<body>
+	<div data-ng-include="'header.html'"></div>
+	<div class="contentwrap" resize data-ng-view></div>
+	<div data-ng-include="'footer.html'"></div>
+</body>
+</html> 

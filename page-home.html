@@ -1,0 +1,54 @@
+<div class="home" data-ng-controller="homeController as home">
+	<div class="col-md-2">
+		<ul class="nav nav-pills nav-stacked" role="tablist" data-ng-repeat="menu in home.menu">
+		  <li id="menu{{$index}}" role="presentation" data-ng-class="{active: home.activemenu == menu.name}" 
+			data-ng-click="home.changeMenu('{{menu.name}}');"><a href>{{menu.name}}</a></li>
+		</ul>
+	</div>
+	<div class="col-md-10">
+		<div class="feed" data-ng-show="home.activemenu == 'Feed'" data-ng-controller="feedController as feed">
+			<div class="text-center">
+				<form class="form-inline" role="form" name="loginForm" 
+				data-ng-submit="feed.validateFeed();">
+					<div class="form-group">
+						<input type="text" invalid-message="{{feed.strings.feed_required}}"
+						data-ng-model="feed.feed.value" 
+						class="form-control form-control-inline" id="feed" data-ng-maxlength=255 required 
+						placeholder="{{feed.strings.feed}}">
+					</div>
+					<button type="submit" class="btn btn-primary">{{feed.strings.post}}</button>
+				</form>
+				
+				<div data-ng-show="feed.feeds.length > 0">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Feed</th>
+								<th>Submitted On</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody data-ng-repeat="feedData in feed.feeds">
+							<tr>
+								<td class="text-left">{{$index + 1}}</td>
+								<td class="text-left">{{feedData.value}}</td>
+								<td class="text-left">{{feedData.date | date:'MM/dd/yyyy hh:mm a'}}</td>
+								<td class="text-left">
+									<button type="submit" id="delete{{$index}}" class="btn btn-danger btn-xs" 
+										data-ng-click="feed.deleteFeed('{{$index}}');">
+										<span class="glyphicon glyphicon-remove"></span>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="profile" data-ng-show="home.activemenu == 'Profile'" data-ng-controller="profileController as profile">
+			Profile
+		</div>
+	</div>
+</div>
