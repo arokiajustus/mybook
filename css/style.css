@@ -1,0 +1,63 @@
+.app-header > .navbar {
+	margin: 0px !important;
+}
+
+.app-header > .navbar-static-top .container {
+	padding: 10px;
+    width: 100%;
+}
+
+.app-header > .navbar-default {
+	background-image: linear-gradient(to bottom, #33CCFF 0px, #fff 100%);
+}
+
+.app-footer > .navbar {
+	background-image: linear-gradient(to top, #33CCFF 0px, #fff 100%);
+	min-height: 0px !important;
+	height: 30px;
+}
+
+.app-footer > .navbar  > .container {
+	text-align: center !important;
+	padding: 5px;
+	color: #666666;
+	font-family: verdana;
+	font-size: 11px;
+}
+
+.login {
+	text-align: right;
+}
+
+.error,.error:focus {
+	border-color: #910000;
+	background-color: #FFC4C4;
+}
+
+.home-image {
+	display: block;
+	height: 600px;
+	max-width: 100%;
+	margin-left: auto;
+    margin-right: auto;
+	box-shadow:rgba(0,0,0,0.5) 0px 0px 24px;
+}
+
+.center-content {
+	background: rgb(66, 173, 255);
+	background: -moz-linear-gradient(91deg, rgb(66, 173, 255) 2%, rgb(16, 81, 124) 50%);
+	background: -webkit-linear-gradient(91deg, rgb(66, 173, 255) 2%, rgb(16, 81, 124) 50%);
+	background: -o-linear-gradient(91deg, rgb(66, 173, 255) 2%, rgb(16, 81, 124) 50%);
+	background: -ms-linear-gradient(91deg, rgb(66, 173, 255) 2%, rgb(16, 81, 124) 50%);
+	background: linear-gradient(181deg, rgb(66, 173, 255) 2%, rgb(16, 81, 124) 50%);
+}
+
+.home {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.form-inline .form-group {
+	max-width: 50% !important;
+}
+
