@@ -2,7 +2,7 @@
 	<div class="col-md-2">
 		<ul class="nav nav-pills nav-stacked" role="tablist" data-ng-repeat="menu in home.menu">
 		  <li id="menu{{$index}}" role="presentation" data-ng-class="{active: home.activemenu == menu.name}" 
-			data-ng-click="home.changeMenu('{{menu.name}}');"><a href>{{menu.name}}</a></li>
+			data-ng-click="home.activemenu = menu.name"><a href>{{menu.name}}</a></li>
 		</ul>
 	</div>
 	<div class="col-md-10">
