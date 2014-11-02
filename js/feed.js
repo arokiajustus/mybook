@@ -1,9 +1,10 @@
 (function() {
 	var app = angular.module('feed', []);
 	
-	app.controller('feedController', function() {
+	app.controller('feedController', ['myBookService', function(myBookService) {
 		
 		this.feedId = 0;
+		this.feedImage = myBookService.profileImage;
 		
 		this.feeds = [];
 		
@@ -40,10 +41,19 @@
 			};
 		};
 		
+		this.showFeed = function() {
+			this.feedImage = myBookService.profileImage;
+			return this.feeds.length > 0;
+		};
+		
 		this.deleteFeed = function(feedIndex) {
 			this.feeds.splice(feedIndex, 1);
 		};
 		
+		this.getProfileImage = function() {
+			alert('sdfdsf');
+		};
+		
 		this.feed = this.getNewFeed();
-	});	
+	}]);	
 })();

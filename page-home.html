@@ -8,7 +8,7 @@
 	<div class="col-md-10">
 		<div class="feed" data-ng-show="home.activemenu == 'Feed'" data-ng-controller="feedController as feed">
 			<div class="text-center">
-				<form class="form-inline" role="form" name="loginForm" 
+				<form class="form-inline" role="form" name="feedForm" 
 				data-ng-submit="feed.validateFeed();">
 					<div class="form-group">
 						<input type="text" invalid-message="{{feed.strings.feed_required}}"
@@ -19,11 +19,12 @@
 					<button type="submit" class="btn btn-primary">{{feed.strings.post}}</button>
 				</form>
 				
-				<div data-ng-show="feed.feeds.length > 0">
+				<div data-ng-show="feed.showFeed()">
 					<table class="table table-hover">
 						<thead>
 							<tr>
 								<th>#</th>
+								<th>Author</th>
 								<th>Feed</th>
 								<th>Submitted On</th>
 								<th>Action</th>
@@ -32,6 +33,7 @@
 						<tbody data-ng-repeat="feedData in feed.feeds">
 							<tr>
 								<td class="text-left">{{$index + 1}}</td>
+								<td class="text-left"><image data-ng-src="{{feed.feedImage}}" height="40" width="40"/></td>
 								<td class="text-left">{{feedData.value}}</td>
 								<td class="text-left">{{feedData.date | date:'MM/dd/yyyy hh:mm a'}}</td>
 								<td class="text-left">
@@ -48,7 +50,52 @@
 		</div>
 		
 		<div class="profile" data-ng-show="home.activemenu == 'Profile'" data-ng-controller="profileController as profile">
-			Profile
+			<div class="alert alert-info" data-ng-show="profile.profileSaved">Profile successfully saved!</div>
+			<form class="form" role="form" name="profileForm" 
+				data-ng-submit="profile.validateProfile();">
+				<div class="form-group">
+					<input type="text" invalid-message="{{profile.strings.name_required}}"
+					data-ng-model="profile.profile.name" 
+					class="form-control form-control-inline" id="name" data-ng-maxlength=255 required 
+					placeholder="{{profile.strings.name}}">
+				</div>
+				<div class="form-group">
+					<input type="number" invalid-message="{{profile.strings.age_required}}"
+					data-ng-model="profile.profile.age" 
+					class="form-control form-control-inline" id="name" data-ng-min=20 data-ng-max=40 data-ng-maxlength=2 required 
+					placeholder="{{profile.strings.age}}">
+				</div>
+				<div class="form-group">
+					<input type="tel" invalid-message="{{profile.strings.phone_required}}"
+					data-ng-model="profile.profile.phone" 
+					class="form-control form-control-inline" id="phone" data-ng-maxlength=10 required 
+					placeholder="{{profile.strings.phone}}">
+				</div>
+				<div class="form-group">
+					<input type="email" invalid-message="{{profile.strings.email_required}}"
+					data-ng-model="profile.profile.email" 
+					class="form-control form-control-inline" id="email" data-ng-maxlength=255 required 
+					placeholder="{{profile.strings.email}}">
+				</div>
+				<div class="form-group">
+					<textarea class="form-control" 
+					invalid-message="{{profile.strings.address_required}}" 
+					data-ng-model="profile.profile.address" 
+					placeholder="{{profile.strings.address}}"
+					rows="5" id="address" required></textarea>
+				</div>
+				<div class="form-group">
+					<div class="col-md-3">
+						<input type="file" id="profileImage" 
+						placeholder="{{profile.strings.image}}"
+						fileread="profile.profile.image">
+					</div>
+					<div class="col-md-9">
+						<image data-ng-src="{{profile.profile.image}}" height="144" width="144"/>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">{{profile.strings.save}}</button>
+			</form>
 		</div>
 	</div>
 </div>

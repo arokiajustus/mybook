@@ -1,6 +1,10 @@
 (function() {
 	var app = angular.module('myBook', ['ngRoute','directives', 'home', 'feed', 'profile']);
 	
+	app.factory("myBookService", function(){
+	  return {profileImage: 'img/empty.png'};
+	});
+	
 	app.config(function($routeProvider) {
 		$routeProvider
 		.when('/', {
