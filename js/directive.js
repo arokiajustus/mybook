@@ -2,15 +2,25 @@
 	
 	var app = angular.module('directives', []);
 	
-	app.directive('invalidMessage', function() {
+	app.directive('showErrorMessages', function() {
 	
 		return {
 			restrict: 'A',
 			compile: function(element, attr) {
 
 				element.on('invalid', function(event){
+
 					this.classList.add('error');
-					this.setCustomValidity(attr.invalidMessage);
+					
+					if (this.validity.valueMissing) {
+						this.setCustomValidity(attr.mandatoryMessage);
+					} else if (this.validity.typeMismatch) {
+						this.setCustomValidity(attr.typeMismatchMessage);
+					} else if (this.validity.rangeUnderflow) {
+						this.setCustomValidity(attr.rangeMessage);
+					} else {
+						this.setCustomValidity(attr.mandatoryMessage);
+					}
 				});
 				
 				element.on('input', function(event){
@@ -26,6 +36,7 @@
 			link: function(scope, elem, attrs) {
 				scope.onResize = function() {
 					$('.contentwrap').css({'margin-top': (($('.navbar-fixed-top').height()) + 1 )+'px'});
+					$('.left-content').css({'height': (screen.height - ($('.navbar-fixed-top').height()))+'px'});
 				}
 				scope.onResize();
 

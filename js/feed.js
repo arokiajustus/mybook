@@ -3,6 +3,9 @@
 	
 	app.controller('feedController', ['myBookService', function(myBookService) {
 		
+		this.feedPosted = false;
+		this.feedDeleted =false;
+		this.selectedFeedIndex = -1;
 		this.feedId = 0;
 		this.feedImage = myBookService.profileImage;
 		
@@ -11,6 +14,8 @@
 		this.strings = {
 			'feed_required': 'Please enter the URL/text feed',
 			'feed': 'Text feed or URL feed',
+			'post_feed': 'Feed posted successfully!',
+			'delete_feed': 'Feed deleted suceesfully!',
 			'post': 'Post'
 		};
 		
@@ -27,6 +32,9 @@
 			this.feed.date = new Date();
 			
 			this.feeds.push(this.feed);
+			
+			this.feedPosted = true;
+			this.feedDeleted = false;
 			
 			this.feed = this.getNewFeed();
 		};
@@ -46,8 +54,11 @@
 			return this.feeds.length > 0;
 		};
 		
-		this.deleteFeed = function(feedIndex) {
-			this.feeds.splice(feedIndex, 1);
+		this.deleteFeed = function() {
+			this.feeds.splice(this.selectedFeedIndex, 1);
+			this.selectedFeedIndex = -1;
+			this.feedPosted = false;
+			this.feedDeleted = true;
 		};
 		
 		this.isUrl = function(str) {
@@ -55,5 +66,11 @@
 		}
 		
 		this.feed = this.getNewFeed();
+		
+		$('#confirmDelete').on('show.bs.modal', function(e) {	
+			var feedScope = angular.element($('[data-ng-controller="feedController as feed"]')).scope();
+			feedScope.feed.selectedFeedIndex = $(e.relatedTarget).data('id');
+			feedScope.$apply();
+		});
 	}]);	
 })();

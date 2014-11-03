@@ -1,39 +1,44 @@
 <div class="home" data-ng-controller="homeController as home">
-	<div class="col-md-2">
+	<div class="col-md-2 left-content">
 		<ul class="nav nav-pills nav-stacked" role="tablist" data-ng-repeat="menu in home.menu">
 		  <li id="menu{{$index}}" role="presentation" data-ng-class="{active: home.activemenu == menu.name}" 
 			data-ng-click="home.activemenu = menu.name"><a href>{{menu.name}}</a></li>
 		</ul>
 	</div>
-	<div class="col-md-10">
-		<div class="feed" data-ng-show="home.activemenu == 'Feed'" data-ng-controller="feedController as feed">
+	<div class="col-md-10 home-center">
+		<div class="feed inner-content" data-ng-show="home.activemenu == 'Feed'" data-ng-controller="feedController as feed">
+			<div id="postAlert" class="alert alert-info text-center" data-ng-show="feed.feedPosted">{{feed.strings.post_feed}}</div>
+			<div id="deleteAlert" class="alert alert-danger text-center" data-ng-show="feed.feedDeleted">{{feed.strings.delete_feed}}</div>
 			<div class="text-center">
-				<form class="form-inline" role="form" name="feedForm" 
+				<form class="form" role="form" name="feedForm" 
 				data-ng-submit="feed.validateFeed();">
-					<div class="form-group">
-						<input type="text" invalid-message="{{feed.strings.feed_required}}"
-						data-ng-model="feed.feed.value" 
-						class="form-control form-control-inline" id="feed" data-ng-maxlength=255 required 
-						placeholder="{{feed.strings.feed}}">
+					<div class="col-md-11">
+						<div class="form-group">
+							<input type="text" show-error-messages mandatory-message="{{feed.strings.feed_required}}"
+							data-ng-model="feed.feed.value" 
+							class="form-control form-control-inline" id="feed" data-ng-maxlength=255 required 
+							placeholder="{{feed.strings.feed}}">
+						</div>
 					</div>
-					<button type="submit" class="btn btn-primary">{{feed.strings.post}}</button>
+					<div class="col-md-1">
+						<button type="submit" class="btn btn-primary">{{feed.strings.post}}</button>
+					</div>
 				</form>
 				
 				<div data-ng-show="feed.showFeed()" style="padding-top: 10px;">
 					<table class="table table-hover">
 						<tbody data-ng-repeat="feedData in feed.feeds">
 							<tr>
-								<td class="text-left"><image data-ng-src="{{feed.feedImage}}" height="50" width="50"/></td>
+								<td class="text-left" style="width: 50px;"><image data-ng-src="{{feed.feedImage}}" height="50" width="50"/></td>
 								<td class="text-left" data-ng-show="feedData.type == 'url'">
 									<a href="{{feedData.value}}" target="_block">{{feedData.value}}</a>
 								</td>
 								<td class="text-left" data-ng-show="feedData.type == 'text'">
 									{{feedData.value}}
 								</td>
-								<td class="text-left">{{feedData.date | date:'MM/dd/yyyy hh:mm a'}}</td>
-								<td class="text-left">
-									<button type="submit" id="delete{{$index}}" class="btn btn-danger btn-xs" 
-										data-ng-click="feed.deleteFeed('{{$index}}');">
+								<td class="text-left" style="width: 152px;">{{feedData.date | date:'MM/dd/yyyy hh:mm a'}}</td>
+								<td class="text-left"  style="width: 10px;">
+									<button type="button" data-id="{{$index}}" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#confirmDelete">
 										<span class="glyphicon glyphicon-remove"></span>
 									</button>
 								</td>
@@ -42,34 +47,52 @@
 					</table>
 				</div>
 			</div>
+			<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+							<h4 class="modal-title" id="myModalLabel">Delete Feed!</h4>
+						</div>
+						<div class="modal-body">
+							Do you want to delete the feed?
+						</div>
+						<div class="modal-footer">				
+							<button type="button" class="btn btn-danger" data-dismiss="modal" data-ng-click="feed.deleteFeed();">Yes</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 		<div data-ng-show="home.activemenu == 'Profile'" data-ng-controller="profileController as profile">
-			<div class="alert alert-info" data-ng-show="profile.profileSaved">Profile successfully saved!</div>
-			<div class="col-md-4 profile">
+			<div id="saveAlert" class="alert alert-info text-center" data-ng-show="profile.profileSaved">{{profile.strings.save_profile}}</div>
+			<div class="col-md-4 inner-content">
 				<form class="form" role="form" name="profileForm" 
 					data-ng-submit="profile.validateProfile();">
 					<div class="form-group">
-						<input type="text" invalid-message="{{profile.strings.name_required}}"
+						<input type="text" show-error-messages mandatory-message="{{profile.strings.name_required}}"
 						data-ng-model="profile.profile.name" 
 						class="form-control form-control-inline" id="name" data-ng-maxlength=255 required 
 						placeholder="{{profile.strings.name}}">
 					</div>
 					<div class="form-group">
-						<input type="number" invalid-message="{{profile.strings.age_required}}"
+						<input type="number" show-error-messages mandatory-message="{{profile.strings.age_required}}" 
+						range-message="{{profile.strings.age_range}}"
 						data-ng-model="profile.profile.age" 
-						class="form-control form-control-inline" id="name" data-ng-min=20 data-ng-max=40 data-ng-maxlength=2 required 
+						class="form-control form-control-inline" id="name" min=20 max=40 data-ng-maxlength=2 required 
 						placeholder="{{profile.strings.age}}">
 					</div>
 					<div class="form-group">
-						<input type="tel" invalid-message="{{profile.strings.phone_required}}"
+						<input type="tel" show-error-messages mandatory-message="{{profile.strings.phone_required}}"
 						data-ng-model="profile.profile.phone" 
 						class="form-control form-control-inline" id="phone" data-ng-maxlength=10 required 
 						placeholder="{{profile.strings.phone}}">
 					</div>
 					<div class="form-group">
-						<input type="email" invalid-message="{{profile.strings.email_required}}"
-						data-ng-model="profile.profile.email" 
+						<input type="email" show-error-messages mandatory-message="{{profile.strings.email_required}}"
+						type-mismatch-message="{{profile.strings.email_invalid}}" data-ng-model="profile.profile.email" 
 						class="form-control form-control-inline" id="email" data-ng-maxlength=255 required 
 						placeholder="{{profile.strings.email}}">
 					</div>
@@ -93,7 +116,7 @@
 					<button style="float: right;" type="submit" class="btn btn-primary">{{profile.strings.save}}</button>
 				</form>
 			</div>
-			<div class="col-md-8 profile">
+			<div class="col-md-8 inner-content">
 				<image data-ng-src="{{profile.profile.image}}" class="img-responsive"/>
 			</div>
 		</div>

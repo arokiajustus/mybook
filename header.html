@@ -9,13 +9,13 @@
 			<div class="col-md-7 login">			
 				<form class="form-inline" role="form" name="loginForm" data-ng-submit="header.validateUser();" data-ng-show="!header.credential.signedin">
 					<div class="form-group">
-						<input type="text" invalid-message="{{header.strings.username_required}}"
+						<input type="text" show-error-messages mandatory-message="{{header.strings.username_required}}"
 						data-ng-model="header.login.username" 
 						class="form-control" id="username" data-ng-maxlength=8 required 
 						placeholder="{{header.strings.username}}">
 					</div>
 					<div class="form-group">
-						<input type="password" invalid-message="{{header.strings.password_required}}"
+						<input type="password" show-error-messages mandatory-message="{{header.strings.password_required}}"
 						data-ng-model="header.login.password" class="form-control" id="password" 
 						data-ng-maxlength=6 required placeholder="{{header.strings.password}}">
 					</div>
