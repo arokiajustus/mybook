@@ -5,3 +5,5 @@ Because, data-ng-include and data-ng-router is not executed in the local file sy
 
 	So, you can go with the location of the Chrome in the command prompt and run with the following command:-
 		chrome --allow-file-access-from-files
+		
+Visit http://askubuntu.com/questions/160245/how-do-i-make-the-google-chrome-flag-allow-file-access-from-files-permanent for more details.
