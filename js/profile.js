@@ -13,10 +13,10 @@
 			'phone': 'Phone',
 			'phone_required': 'Please enter the phone',
 			'email': 'Email',
-			'email_required': 'Please enter the email',
+			'email_required': 'Please enter the valid email',
 			'address': 'Address',
-			'address_required': 'Please enter the address',
-			'save': 'Save'
+			'profile_image': 'Profile Image',
+			'save': 'Save Profile'
 		};
 		
 		this.profile = {
