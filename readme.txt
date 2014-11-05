@@ -1,5 +1,14 @@
 Welcome to MyBook Application.
 
+Install Grunt Plugins:-
+-----------------------
+>npm install grunt-contrib-uglify --save-dev
+>npm install grunt-contrib-concat --save-dev
+>npm install grunt-contrib-cssmin --save-dev
+>npm install grunt-contrib-clean --save-dev
+
+Running the Application:-
+--------------------------
 	Need to start Chrome from command prompt with enable file access for running this application.
 Because, data-ng-include and data-ng-router is not executed in the local file system.
 

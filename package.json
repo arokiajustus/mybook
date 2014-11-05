@@ -1,0 +1,26 @@
+{
+  "name": "MyBook",
+  "version": "1.0.0",
+  "description": "Feed and Profile Management",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arokiajustus/mybook.git"
+  },
+  "author": "Arokia Justus Nayagam M",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arokiajustus/mybook/issues"
+  },
+  "homepage": "https://github.com/arokiajustus/mybook",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-uglify": "~0.6.0",
+    "grunt-contrib-concat": "~0.5.0",
+    "grunt-contrib-cssmin": "~0.10.0",
+    "grunt-contrib-clean": "~0.6.0"
+  }
+}
